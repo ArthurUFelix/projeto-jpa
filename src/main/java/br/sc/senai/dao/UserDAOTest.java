@@ -1,5 +1,6 @@
 package br.sc.senai.dao;
 
+import br.sc.senai.model.Company;
 import br.sc.senai.model.User;
 
 import javax.persistence.EntityManager;
@@ -16,10 +17,16 @@ public class UserDAOTest {
 
         entityManager.getTransaction().begin();
 
+        Company company = new Company();
+        company.setName("Senai");
+
+        entityManager.persist(company);
+
         User newUser = new User();
         newUser.setEmail("pedromoratelli@gmail.com");
         newUser.setFullname("Pedro Moratelli");
         newUser.setPassword("senhafacil");
+        newUser.setCompany(company);
 
         entityManager.persist(newUser);
 
