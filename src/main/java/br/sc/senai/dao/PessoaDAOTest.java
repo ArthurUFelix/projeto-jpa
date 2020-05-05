@@ -1,12 +1,12 @@
 package br.sc.senai.dao;
 
-import br.sc.senai.model.User;
+import br.sc.senai.model.Pessoa;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class UserDAOTest {
+public class PessoaDAOTest {
 
     private static EntityManagerFactory factory;
     private static EntityManager entityManager;
@@ -19,9 +19,9 @@ public class UserDAOTest {
 
 //        insert();
 
-        update();
+//        update();
 
-        delete();
+//        delete();
 
         entityManager.close();
         factory.close();
@@ -30,12 +30,12 @@ public class UserDAOTest {
     public static void insert() {
         entityManager.getTransaction().begin();
 
-        User newUser = new User();
-        newUser.setEmail("pedromoratelli@gmail.com");
-        newUser.setFullname("Pedro Moratelli");
-        newUser.setPassword("senhafacil");
+        Pessoa newPessoa = new Pessoa();
+        newPessoa.setNome("Pedro");
+        newPessoa.setSobrenome("Coelho");
+        newPessoa.setCpf("02365478912");
 
-        entityManager.persist(newUser);
+        entityManager.persist(newPessoa);
 
         entityManager.getTransaction().commit();
 
@@ -44,12 +44,11 @@ public class UserDAOTest {
     public static void update() {
         entityManager.getTransaction().begin();
 
-        User updatedUser = entityManager.find(User.class, 1);
+        Pessoa updatedPessoa = entityManager.find(Pessoa.class, 1);
 
-        updatedUser.setFullname("Arthur Felix");
-        updatedUser.setEmail("arthur@gmail.com");
+        updatedPessoa.setNome("Arthur");
 
-        entityManager.merge(updatedUser);
+        entityManager.merge(updatedPessoa);
 
         entityManager.getTransaction().commit();
     }
@@ -57,9 +56,9 @@ public class UserDAOTest {
     public static void delete() {
         entityManager.getTransaction().begin();
 
-        User user = entityManager.find(User.class, 2);
+        Pessoa pessoa = entityManager.find(Pessoa.class, 1);
 
-        entityManager.remove(user);
+        entityManager.remove(pessoa);
 
         entityManager.getTransaction().commit();
     }
