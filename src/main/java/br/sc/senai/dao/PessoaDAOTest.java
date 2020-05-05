@@ -1,5 +1,6 @@
 package br.sc.senai.dao;
 
+import br.sc.senai.model.Empresa;
 import br.sc.senai.model.Pessoa;
 
 import javax.persistence.EntityManager;
@@ -19,9 +20,7 @@ public class PessoaDAOTest {
 
 //        insert();
 
-//        update();
-
-//        delete();
+        find();
 
         entityManager.close();
         factory.close();
@@ -30,35 +29,26 @@ public class PessoaDAOTest {
     public static void insert() {
         entityManager.getTransaction().begin();
 
-        Pessoa newPessoa = new Pessoa();
-        newPessoa.setNome("Pedro");
-        newPessoa.setSobrenome("Coelho");
-        newPessoa.setCpf("02365478912");
+        Pessoa novaPessoa = new Pessoa();
+        novaPessoa.setNome("Arthur");
+        novaPessoa.setSobrenome("Felix");
+        novaPessoa.setCpf("02365478912");
 
-        entityManager.persist(newPessoa);
+        Empresa empresa = entityManager.find(Empresa.class, 1);
+        novaPessoa.setEmpresa(empresa);
 
-        entityManager.getTransaction().commit();
-
-    }
-
-    public static void update() {
-        entityManager.getTransaction().begin();
-
-        Pessoa updatedPessoa = entityManager.find(Pessoa.class, 1);
-
-        updatedPessoa.setNome("Arthur");
-
-        entityManager.merge(updatedPessoa);
+        entityManager.persist(novaPessoa);
 
         entityManager.getTransaction().commit();
     }
 
-    public static void delete() {
+    public static void find() {
         entityManager.getTransaction().begin();
 
-        Pessoa pessoa = entityManager.find(Pessoa.class, 1);
+        Pessoa pessoa = entityManager.find(Pessoa.class, 2);
 
-        entityManager.remove(pessoa);
+        System.out.println("Pessoa: " + pessoa.getNome() + " " + pessoa.getSobrenome());
+        System.out.println("Empresa: " + pessoa.getEmpresa().getNome());
 
         entityManager.getTransaction().commit();
     }

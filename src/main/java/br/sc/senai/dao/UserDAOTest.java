@@ -18,11 +18,13 @@ public class UserDAOTest {
 
         entityManager = factory.createEntityManager();
 
-        insert();
+//        insert();
 
 //        update();
 
 //        delete();
+
+        find();
 
         entityManager.close();
         factory.close();
@@ -65,5 +67,18 @@ public class UserDAOTest {
         entityManager.remove(user);
 
         entityManager.getTransaction().commit();
+    }
+
+    public static void find() {
+
+        entityManager.getTransaction().begin();
+
+        User user = entityManager.find(User.class, 3);
+
+        System.out.println("Usuário: " + user.getFullname());
+        System.out.println("Empresa: " + user.getCompany().getName());
+
+        entityManager.getTransaction().commit();
+
     }
 }

@@ -1,10 +1,10 @@
 package br.sc.senai.dao;
 
-import br.sc.senai.model.Company;
+import br.sc.senai.model.Empresa;
 
 import javax.persistence.*;
 
-public class CompanyDaoTest {
+public class EmpresaDAOTest {
 
     private static EntityManagerFactory factory;
     private static EntityManager entityManager;
@@ -24,10 +24,10 @@ public class CompanyDaoTest {
     public static void insert() {
         entityManager.getTransaction().begin();
 
-        Company company = new Company();
-        company.setName("Dot");
+        Empresa empresa = new Empresa();
+        empresa.setNome("Intradebook");
 
-        entityManager.persist(company);
+        entityManager.persist(empresa);
 
         entityManager.getTransaction().commit();
     }

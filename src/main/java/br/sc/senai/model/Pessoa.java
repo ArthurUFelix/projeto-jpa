@@ -16,6 +16,18 @@ public class Pessoa {
 
     private String cpf;
 
+    @ManyToOne
+    @JoinColumn(name="empresa_id")
+    private Empresa empresa;
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
     public Integer getId() {
         return id;
     }
