@@ -6,6 +6,8 @@ import br.sc.senai.model.User;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
+import java.util.List;
 
 public class UserDAOTest {
 
@@ -24,7 +26,9 @@ public class UserDAOTest {
 
 //        delete();
 
-        find();
+//        find();
+
+        listUsers();
 
         entityManager.close();
         factory.close();
@@ -34,9 +38,9 @@ public class UserDAOTest {
         entityManager.getTransaction().begin();
 
         User newUser = new User();
-        newUser.setEmail("pedromoratelli@gmail.com");
-        newUser.setFullname("Pedro Moratelli");
-        newUser.setPassword("senhafacil");
+        newUser.setEmail("arthurfelix@gmail.com");
+        newUser.setFullname("Arthur Felix");
+        newUser.setPassword("senhadificil");
 
         Company company = entityManager.find(Company.class, 1);
         newUser.setCompany(company);
@@ -70,15 +74,24 @@ public class UserDAOTest {
     }
 
     public static void find() {
-
         entityManager.getTransaction().begin();
 
-        User user = entityManager.find(User.class, 3);
+        User user = entityManager.find(User.class, 4);
 
         System.out.println("Usuário: " + user.getFullname());
         System.out.println("Empresa: " + user.getCompany().getName());
 
         entityManager.getTransaction().commit();
+    }
 
+    public static void listUsers() {
+        Query query = entityManager.createNamedQuery("User.listAllOrderByName");
+        List<User> users = query.getResultList();
+
+        for (User user : users) {
+            System.out.println("------------");
+            System.out.println(user.getFullname());
+            System.out.println(user.getEmail());
+        }
     }
 }

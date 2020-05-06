@@ -4,6 +4,10 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "user")
+@NamedQueries({
+        @NamedQuery(name="User.listAllOrderByName", query="select u from User u order by u.fullname"),
+        @NamedQuery(name="User.listAllOrderByEmailDesc", query="select u from User u order by u.email desc"),
+})
 public class User {
 
     @Id
