@@ -4,6 +4,7 @@ import br.sc.senai.model.Phone;
 import br.sc.senai.model.User;
 
 import javax.persistence.*;
+import java.util.List;
 
 public class PhoneDAOTest {
 
@@ -18,6 +19,8 @@ public class PhoneDAOTest {
 
 //        insert();
 
+        listPhones();
+
         entityManager.close();
         factory.close();
     }
@@ -26,7 +29,7 @@ public class PhoneDAOTest {
         entityManager.getTransaction().begin();
 
         Phone phone = new Phone();
-        phone.setNumber("48 932145678");
+        phone.setNumber("(34) 963241589");
 
         User user = entityManager.find(User.class, 4);
         phone.setUser(user);
@@ -34,5 +37,15 @@ public class PhoneDAOTest {
         entityManager.persist(phone);
 
         entityManager.getTransaction().commit();
+    }
+
+    public static void listPhones() {
+        Query query = entityManager.createNamedQuery("Company.listWhereDDD48");
+        List<Phone> phones = query.getResultList();
+
+        for (Phone phone : phones) {
+            System.out.println("------------");
+            System.out.println(phone.getNumber());
+        }
     }
 }

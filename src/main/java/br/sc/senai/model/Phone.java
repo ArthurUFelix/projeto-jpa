@@ -4,6 +4,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "phone")
+@NamedQueries({
+        @NamedQuery(name="Company.listWhereDDD48", query="select p from Phone p where p.number like '(48)%'"),
+})
 public class Phone {
 
     @Id
